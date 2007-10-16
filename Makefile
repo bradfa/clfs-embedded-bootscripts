@@ -4,14 +4,14 @@ MODE=754
 DIRMODE=755
 CONFMODE=644
 
-all: install
+all:
+	@grep "^install" Makefile | cut -d ":" -f 1
+	@echo "Select an appropriate install target from the above list" ; exit 1
 
 create-dirs:
-	install -d -m ${DIRMODE} ${EXTDIR}/rc.d/start
-	install -d -m ${DIRMODE} ${EXTDIR}/rc.d/stop
-	install -d -m ${DIRMODE} ${EXTDIR}/rc.d/init.d
+	install -d -m ${DIRMODE} ${EXTDIR}/rc.d/{init.d,start,stop}
 
-install: create-dirs
+install-bootscripts: create-dirs
 	install -m ${CONFMODE} clfs/rc.d/init.d/functions ${EXTDIR}/rc.d/init.d/
 	install -m ${MODE} clfs/rc.d/startup         ${EXTDIR}/rc.d/
 	install -m ${MODE} clfs/rc.d/shutdown        ${EXTDIR}/rc.d/
