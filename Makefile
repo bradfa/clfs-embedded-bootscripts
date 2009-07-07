@@ -1,12 +1,23 @@
-ETCDIR=/etc
-EXTDIR=${DESTDIR}${ETCDIR}
-MODE=754
-DIRMODE=755
-CONFMODE=644
+VERSION		:= 1.0-pre4
+
+ETCDIR		:= /etc
+EXTDIR		:= ${DESTDIR}${ETCDIR}
+MODE		:= 754
+DIRMODE		:= 755
+CONFMODE	:= 644
 
 all:
 	@grep "^install" Makefile | cut -d ":" -f 1
+	@echo dist
 	@echo "Select an appropriate install target from the above list" ; exit 1
+
+.PHONY: dist
+dist:
+	rm -rf "dist/bootscripts-clfs-embedded-$(VERSION)"
+	mkdir -p "dist/bootscripts-clfs-embedded-$(VERSION)"
+	tar --exclude dist -c * | tar -x -C "dist/bootscripts-clfs-embedded-$(VERSION)"
+	(cd dist; tar -cjf "bootscripts-clfs-embedded-$(VERSION).tar.bz2" "bootscripts-clfs-embedded-$(VERSION)")
+	rm -rf "dist/bootscripts-clfs-embedded-$(VERSION)"
 
 create-dirs:
 	install -d -m ${DIRMODE} ${EXTDIR}/rc.d/{init.d,start,stop}
