@@ -1,22 +1,10 @@
-VERSION		:= 1.0-pre5
-
 ETCDIR		:= /etc
 EXTDIR		:= ${DESTDIR}${ETCDIR}
 MODE		:= 754
 DIRMODE		:= 755
 CONFMODE	:= 644
 
-all:
-	@grep "^install" Makefile | cut -d ":" -f 1
-	@echo dist
-	@echo "Select an appropriate install target from the above list" ; exit 1
-
-dist:
-	rm -rf "dist/clfs-embedded-bootscripts-$(VERSION)"
-	mkdir -p "dist/clfs-embedded-bootscripts-$(VERSION)"
-	tar --exclude dist -c * | tar -x -C "dist/clfs-embedded-bootscripts-$(VERSION)"
-	(cd dist; tar -cjf "clfs-embedded-bootscripts-$(VERSION).tar.bz2" "clfs-embedded-bootscripts-$(VERSION)")
-	rm -rf "dist/clfs-embedded-bootscripts-$(VERSION)"
+all: install-bootscripts install-dropbear
 
 create-dirs:
 	install -d -m ${DIRMODE} ${EXTDIR}/rc.d/init.d
@@ -39,4 +27,4 @@ install-dropbear: create-dirs
 	ln -sf ../init.d/sshd ${EXTDIR}/rc.d/start/S30sshd
 	ln -sf ../init.d/sshd ${EXTDIR}/rc.d/stop/K30sshd
 
-.PHONY: dist all create-dirs install install-dropbear
+.PHONY: all create-dirs install install-dropbear
