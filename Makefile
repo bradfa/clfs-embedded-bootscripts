@@ -15,12 +15,9 @@ install-bootscripts: create-dirs
 	install -m ${CONFMODE} clfs/rc.d/init.d/functions ${EXTDIR}/rc.d/init.d/
 	install -m ${MODE} clfs/rc.d/startup         ${EXTDIR}/rc.d/
 	install -m ${MODE} clfs/rc.d/shutdown        ${EXTDIR}/rc.d/
-	install -m ${MODE} clfs/rc.d/init.d/network  ${EXTDIR}/rc.d/init.d/
 	install -m ${MODE} clfs/rc.d/init.d/syslog   ${EXTDIR}/rc.d/init.d/
 	ln -sf ../init.d/syslog ${EXTDIR}/rc.d/start/S05syslog
 	ln -sf ../init.d/syslog ${EXTDIR}/rc.d/stop/K99syslog
-	ln -sf ../init.d/network ${EXTDIR}/rc.d/start/S10network
-	ln -sf ../init.d/network ${EXTDIR}/rc.d/stop/K80network
 
 install-dropbear: create-dirs
 	install -m ${MODE} clfs/rc.d/init.d/sshd   ${EXTDIR}/rc.d/init.d/
