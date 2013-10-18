@@ -24,4 +24,4 @@ install-dropbear: create-dirs
 	ln -sf ../init.d/sshd ${EXTDIR}/rc.d/start/S30sshd
 	ln -sf ../init.d/sshd ${EXTDIR}/rc.d/stop/K30sshd
 
-.PHONY: all create-dirs install install-dropbear
+.PHONY: all create-dirs install-bootscripts install-dropbear
