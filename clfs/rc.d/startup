@@ -24,7 +24,7 @@ echo -n "Mounting devpts: "
 mount /dev/pts
 check_status
 
-if [ -x /sbin/hwclock ] && [ -e /dev/rtc ]; then
+if [ -x /sbin/hwclock ] && [ -e /dev/rtc* ]; then
 	echo -n "Setting system clock: "
 	hwclock --hctosys --utc
 	check_status
