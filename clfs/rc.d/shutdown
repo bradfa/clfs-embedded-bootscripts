@@ -20,7 +20,7 @@ do
 done
 
 if [ -x /sbin/hwclock ] && [ -e /dev/rtc ]; then
-	echo -n "Syncing hardware clock to system clock:"
+	echo -n "Syncing system clock to hardware clock: "
 	hwclock --systohc --utc
 	check_status
 fi
