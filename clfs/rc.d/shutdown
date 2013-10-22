@@ -25,7 +25,7 @@ if [ -x /sbin/hwclock ] && [ -e /dev/rtc ]; then
 	check_status
 fi
 
-if [ -x /sbin/swapoff ]; then
+if [ -x /sbin/swapoff ] && [ -s /etc/fstab ]; then
 	echo -n "Disabling swap space: "
 	swapoff -a
 	check_status
