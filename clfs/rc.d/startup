@@ -9,7 +9,6 @@
 /bin/mount -t tmpfs /tmp /tmp
 /bin/mkdir /dev/pts
 /bin/mkdir /dev/shm
-ln -s ../tmp /var/tmp
 
 /bin/echo "/sbin/mdev" > /proc/sys/kernel/hotplug
 
@@ -54,6 +53,10 @@ fi
 
 echo -n "Remounting root rw: "
 mount -o remount,rw /
+check_status
+
+echo -n "Linking /var/tmp and /tmp: "
+ln -s ../tmp /var/tmp
 check_status
 
 echo -n "Setting hostname: "
