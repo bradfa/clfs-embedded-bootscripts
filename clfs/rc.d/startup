@@ -68,6 +68,7 @@ hostname -F /etc/HOSTNAME
 check_status
 
 echo -n "Cleaning up system: "
+rm -rf /var/run/*
 > /var/run/utmp
 touch /var/log/wtmp
 touch /var/log/messages
@@ -75,7 +76,6 @@ chmod 0664 /var/run/utmp
 chmod 0664 /var/log/wtmp
 chmod 0660 /var/log/messages
 rm -rf /tmp/*
-rm -f /var/run/*.pid
 check_status
 
 echo -n "Setting up interface lo: "
