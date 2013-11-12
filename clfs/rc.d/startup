@@ -20,6 +20,10 @@ echo -n "Mounting devpts: "
 mount /dev/pts
 check_status
 
+echo -n "Mounting shared memory: "
+/bin/mount -t tmpfs none /dev/shm
+check_status
+
 if [ -x /sbin/hwclock ] && [ -e /dev/rtc0 ]; then
 	echo -n "Setting system clock: "
 	hwclock --hctosys --utc
