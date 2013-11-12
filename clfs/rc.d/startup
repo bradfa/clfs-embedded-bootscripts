@@ -17,7 +17,7 @@ echo -n "Starting mdev: "
 check_status
 
 echo -n "Mounting devpts: "
-mount /dev/pts
+/bin/mount -t devpts none /dev/pts
 check_status
 
 echo -n "Mounting shared memory: "
