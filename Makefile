@@ -4,7 +4,7 @@ MODE		:= 754
 DIRMODE		:= 755
 CONFMODE	:= 644
 
-all: install-bootscripts install-dropbear
+all: install-bootscripts install-dropbear install-netplug
 
 create-dirs:
 	install -d -m ${DIRMODE} ${EXTDIR}/rc.d/init.d
@@ -24,4 +24,9 @@ install-dropbear: create-dirs
 	ln -sf ../init.d/sshd ${EXTDIR}/rc.d/start/S30sshd
 	ln -sf ../init.d/sshd ${EXTDIR}/rc.d/stop/K30sshd
 
-.PHONY: all create-dirs install-bootscripts install-dropbear
+install-netplug: create-dirs
+	install -m ${MODE} clfs/rc.d/init.d/netplugd   ${EXTDIR}/rc.d/init.d/
+	ln -sf ../init.d/netplugd ${EXTDIR}/rc.d/start/S10netplugd
+	ln -sf ../init.d/netplugd ${EXTDIR}/rc.d/stop/K90netplugd
+
+.PHONY: all create-dirs install-bootscripts install-dropbear install-netplug
